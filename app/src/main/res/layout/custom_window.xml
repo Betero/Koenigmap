@@ -22,4 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/butmap"
+        android:layout_width="73dp"
+        android:layout_height="32dp"
+        android:background="#6BADE3"
+        android:text="Читать" />
+
+
 </LinearLayout>

@@ -6,6 +6,7 @@ public class Archiitect {
     private String desc;
     private double lon,lat;
     private int image;
+    private int but;
 
     public Archiitect(String title, String desc, double lon, double lat, int image) {
         this.title = title;
@@ -55,4 +56,11 @@ public class Archiitect {
         this.image = image;
     }
 
+    public int getBut() {
+        return but;
+    }
+
+    public void setBut(int but) {
+        this.but = but;
+    }
 }

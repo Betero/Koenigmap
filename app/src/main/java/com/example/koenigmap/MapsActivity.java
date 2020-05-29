@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class MapsActivity<listkirh> extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class MapsActivity<listkirh> extends FragmentActivity implements OnMapReadyCallback,
+        GoogleMap.OnInfoWindowClickListener, GoogleMap.OnMapLongClickListener {
 
     Location currentLocation;
     private int popupXOffset;
@@ -67,10 +69,6 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
 
 
     /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -81,7 +79,6 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            // Add a marker in Sydney and move the camera
         }
 
         CameraPosition cameraPosition = new CameraPosition.Builder().target(
@@ -122,6 +119,7 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
                 ImageView im = (ImageView) v.findViewById(R.id.imageView1);
                 TextView tv1 = (TextView) v.findViewById(R.id.textView1);
                 TextView tv2 = (TextView) v.findViewById(R.id.textView2);
+                Button bt = (Button) v.findViewById(R.id.butmap);
                 String title=marker.getTitle();
                 String informations=marker.getSnippet();
 
@@ -142,8 +140,8 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
 
                 return v;
             }
-        });
 
+        });
 
 
         mMap.setOnInfoWindowClickListener(this);
@@ -199,13 +197,15 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Toast.makeText(this, "Info window clicked",
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Загрузка информации", Toast.LENGTH_SHORT).show();
+
     }
 
 
+    @Override
+    public void onMapLongClick(LatLng latLng) {
 
-
+    }
 }
 
 
