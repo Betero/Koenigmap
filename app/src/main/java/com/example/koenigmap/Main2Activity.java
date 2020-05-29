@@ -64,10 +64,10 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child(user).exists()) {
-                    if(!user.isEmpty()){
+                    if(user.isEmpty()){
                         Name login = dataSnapshot.child(user).getValue(Name.class);
                         if(login.getPassword().equals(password))
-                            Toast.makeText(Main2Activity.this, "Login OK", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Main2Activity.this, "L", Toast.LENGTH_SHORT).show();
                         else
                             Toast.makeText(Main2Activity.this, "Wrong password", Toast.LENGTH_SHORT).show();
                     }
@@ -121,8 +121,7 @@ public class Main2Activity extends AppCompatActivity {
                         if (dataSnapshot.child(name.getUserName()).exists())
                             Toast.makeText(Main2Activity.this, "Пользователь уже зарегистрирован!", Toast.LENGTH_SHORT).show();
                         else {
-                            users.child(name.getUserName())
-                                    .setValue(users);
+                            users.child(name.getUserName()).setValue(users);
                             Toast.makeText(Main2Activity.this, "Пользоваель успешно зарегистрирован", Toast.LENGTH_SHORT).show();
                         }
 

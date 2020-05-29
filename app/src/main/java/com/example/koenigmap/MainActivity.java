@@ -42,8 +42,16 @@ public class MainActivity extends AppCompatActivity {
         menus.startAnimation(frombottom);
 
 
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMapsActivity();
+            }
+        });
 
-        button= (Button) findViewById(R.id.button1);
+
+        button = (Button) findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,11 +60,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void openMain2Activity() {
         Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
     }
 
-
+    public void openMapsActivity() {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
+
+
+}
 
