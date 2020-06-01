@@ -8,13 +8,12 @@
 
     <ImageView
         android:id="@+id/clover"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="272dp"
         android:elevation="6dp"
+        android:gravity="center"
         android:src="@drawable/bgapp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout

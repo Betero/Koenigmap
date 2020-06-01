@@ -113,7 +113,7 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
                 ImageView im = (ImageView) v.findViewById(R.id.imageView1);
                 TextView tv1 = (TextView) v.findViewById(R.id.textView1);
                 TextView tv2 = (TextView) v.findViewById(R.id.textView2);
-                Button bt = (Button) v.findViewById(R.id.butmap);
+                //Button bt = (Button) v.findViewById(R.id.butmap);
                 String title=marker.getTitle();
                 String informations=marker.getSnippet();
 

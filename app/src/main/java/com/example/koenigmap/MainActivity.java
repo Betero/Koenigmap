@@ -59,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        button = (Button) findViewById(R.id.button2);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMain3Activity();
+            }
+        });
+
     }
 
     public void openMain2Activity() {
@@ -68,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openMapsActivity() {
         Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openMain3Activity() {
+        Intent intent = new Intent(this, Main3Activity.class);
         startActivity(intent);
     }
 
