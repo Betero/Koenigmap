@@ -1,9 +1,13 @@
 package com.example.koenigmap;
 
+import android.net.Uri;
+
 public class Kirh {
 
     private String tite;
     private String des;
+
+    private String site;
     private double ln,lt;
     private int img;
 
@@ -13,6 +17,15 @@ public class Kirh {
         this.ln = lon;
         this.lt = lat;
         this.img = image;
+        this.site = site;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 
     public void setTite(String tite) {

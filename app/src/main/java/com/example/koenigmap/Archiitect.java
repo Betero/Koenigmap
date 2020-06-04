@@ -6,7 +6,7 @@ public class Archiitect {
     private String desc;
     private double lon,lat;
     private int image;
-    private int but;
+    private String site1;
 
     public Archiitect(String title, String desc, double lon, double lat, int image) {
         this.title = title;
@@ -14,6 +14,15 @@ public class Archiitect {
         this.lon = lon;
         this.lat = lat;
         this.image = image;
+        this.site1 = site1;
+    }
+
+    public String getSite1() {
+        return site1;
+    }
+
+    public void setSite1(String site1) {
+        this.site1 = site1;
     }
 
     public String getTitle() {
@@ -56,11 +65,4 @@ public class Archiitect {
         this.image = image;
     }
 
-    public int getBut() {
-        return but;
-    }
-
-    public void setBut(int but) {
-        this.but = but;
-    }
 }

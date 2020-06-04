@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout textsplash, texthome, menus;
     Animation frombottom;
 
+    private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +69,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        button = (Button) findViewById(R.id.button3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openQuActivity();
+            }
+        });
+
     }
 
     public void openMain2Activity() {
         Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
+    }
+
+    public void openQuActivity() {
+        Intent intent = new Intent(this, QuActivity.class);
         startActivity(intent);
     }
 
