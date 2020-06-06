@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Helpers;
 
 import android.content.Context;
 import android.database.Cursor;

@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Controller;
 
 import android.os.Bundle;
 
@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.koenigmap.R;
+import com.example.koenigmap.Adapters.RecyclerViewAdapter;
+import com.example.koenigmap.Model.Book;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main3Activity extends AppCompatActivity {
 

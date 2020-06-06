@@ -12,6 +12,11 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.koenigmap.Controller.CategoriesActivity;
+import com.example.koenigmap.Controller.Main2Activity;
+import com.example.koenigmap.Controller.Main3Activity;
+import com.example.koenigmap.Controller.MapsActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button button;

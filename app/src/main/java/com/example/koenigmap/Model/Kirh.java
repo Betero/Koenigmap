@@ -1,6 +1,4 @@
-package com.example.koenigmap;
-
-import android.net.Uri;
+package com.example.koenigmap.Model;
 
 public class Kirh {
 

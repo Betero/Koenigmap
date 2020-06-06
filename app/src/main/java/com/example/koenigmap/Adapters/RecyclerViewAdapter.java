@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.koenigmap.Controller.Book_Activity;
+import com.example.koenigmap.R;
+import com.example.koenigmap.Model.Book;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
@@ -46,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext,Book_Activity.class);
+                Intent intent = new Intent(mContext, Book_Activity.class);
 
                 // passing data to the book activity
                 intent.putExtra("Title",mData.get(position).getTitle());

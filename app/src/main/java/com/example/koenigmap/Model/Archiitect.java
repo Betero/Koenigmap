@@ -1,5 +1,4 @@
-package com.example.koenigmap;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+package com.example.koenigmap.Model;
 
 public class Archiitect {
     private String title;

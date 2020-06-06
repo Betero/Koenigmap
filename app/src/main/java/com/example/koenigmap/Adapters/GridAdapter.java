@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.koenigmap.Controller.CategoriesActivity;
+import com.example.koenigmap.R;
 
 public class GridAdapter extends BaseAdapter {
 
@@ -47,7 +50,7 @@ public class GridAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent questionIntent = new Intent(parent.getContext(),QuestionsActivity.class);
+                Intent questionIntent = new Intent(parent.getContext(), CategoriesActivity.QuestionsActivity.class);
                 questionIntent.putExtra("category", category);
                 questionIntent.putExtra("setNo", position+1);
                 parent.getContext().startActivity(questionIntent);

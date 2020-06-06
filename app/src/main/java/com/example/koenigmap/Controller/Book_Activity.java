@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Locale;
+import com.example.koenigmap.R;
 
 public class Book_Activity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.koenigmap.Model.MainData;
+import com.example.koenigmap.R;
 
 import java.util.ArrayList;
 

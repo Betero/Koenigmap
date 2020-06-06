@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Model;
 
 public class MainData {
     String image, name;

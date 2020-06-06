@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.koenigmap.Model.CategoryModel;
+import com.example.koenigmap.R;
+import com.example.koenigmap.Controller.SetsActivity;
 
 import java.util.List;
 
@@ -62,7 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent setIntent = new Intent(itemView.getContext(),SetsActivity.class);
+                    Intent setIntent = new Intent(itemView.getContext(), SetsActivity.class);
                     setIntent.putExtra("title", title);
                     setIntent.putExtra("sets", sets);
                     itemView.getContext().startActivity(setIntent);

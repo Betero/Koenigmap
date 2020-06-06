@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Controller;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -7,6 +7,9 @@ import android.widget.GridView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.koenigmap.Adapters.GridAdapter;
+import com.example.koenigmap.R;
 
 public class SetsActivity extends AppCompatActivity {
 

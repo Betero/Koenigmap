@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Model;
 
 public class QuestionModel {
     private String question,optionA, optionB, optionC, optionD, correctANS;
