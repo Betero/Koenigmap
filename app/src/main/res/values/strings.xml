@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Koenigmap</string>
+    <string name="sets">sets</string>
+    <string name="title">Title</string>
 </resources>

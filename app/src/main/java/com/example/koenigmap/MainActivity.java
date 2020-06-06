@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        button = (Button) findViewById(R.id.button1);
+        button = (Button) findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button = (Button) findViewById(R.id.button3);
+        button = (Button) findViewById(R.id.button1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openQuActivity();
+                openCategoriesActivity();
             }
         });
 
@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openQuActivity() {
-        Intent intent = new Intent(this, QuActivity.class);
+    public void openCategoriesActivity() {
+        Intent intent = new Intent(this, CategoriesActivity.class);
         startActivity(intent);
     }
 
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Main3Activity.class);
         startActivity(intent);
     }
-
 
 }
 

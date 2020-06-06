@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.slice.SliceItem;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -65,9 +66,12 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
     private ArrayList<Archiitect> list;
     private ArrayList<Kirh> listkirh;
     private String TAG;
+    private EditText nSearchText;
+
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,96 +82,50 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkUserLocationPermission();
         }
-
-        searchView = findViewById(R.id.sv_location);
+//        mSe
+//        searchView = findViewById(R.id.input_search);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mMap);
         mapFragment.getMapAsync(this);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                String location = searchView.getQuery().toString();
-                List<Address> addressList = null;
-
-                if (location != null || !location.equals("")) {
-                    Geocoder geocoder = new Geocoder(MapsActivity.this);
-                    try {
-                        addressList = geocoder.getFromLocationName(location, 1);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    // mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
-                }
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-
-
-        });
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                String location = searchView.getQuery().toString();
+//                List<Address> addressList = null;
+//
+//                if (location != null || !location.equals("")) {
+//                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+//                    try {
+//                        addressList = geocoder.getFromLocationName(location, 1);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    Address address = addressList.get(0);
+//                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+//                    // mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
+//                }
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//
+//
+//        });
 
         mapFragment.getMapAsync(this);
 
-//        client = LocationServices.getFusedLocationProviderClient(this);
-//
-//        if (ActivityCompat.checkSelfPermission(MapsActivity.this,
-//                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//            getCurrentLocation();
-//        } else {
-//            //When permission denied
-//            //Request permission
-//            ActivityCompat.requestPermissions(MapsActivity.this,
-//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-//        }
 
     }
 
-//    private void getCurrentLocation() {
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
-//        Task<Location> task = client.getLastLocation();
-//        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-//            @Override
-//            public void onSuccess(final Location location) {
-//
-//                if (location != null){
-//                  supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-//                      @Override
-//                      public void onMapReady(GoogleMap googleMap) {
-//                          LatLng latLng = new LatLng(location.getLongitude(), (location.getLatitude()));
-//                          //Create marker options
-//                          MarkerOptions options = new MarkerOptions().position(latLng)
-//                                  .title("Я здесь, черти");
-//                          //Zoom
-//                          googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-//                          //Add marker
-//                          googleMap.addMarker(options);
-//                      }
-//                  });
-//                }
-//            }
-//        });
-//
-//
-//    }
+
 
 
     private void moveCamera(LatLng latLng, float zoom){
@@ -190,22 +148,22 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(54.70645005, 20.512169623964496)));
 
 
-        list.add(new Archiitect("Форт №1, Штайн", "где этот текст?", 54.70606519543658, 20.60565233230591, R.drawable.f1));
-        list.add(new Archiitect("Форт №1a, Грёбен", "что-то", 54.734873239025106, 20.609128475189213, R.drawable.f1a));
-        list.add(new Archiitect("Форт №2, Бронзарт", "что-то", 54.748802070052355, 20.601339340209964, R.drawable.f2));
-        list.add(new Archiitect("Форт №2а, Барнеков", "что-то", 54.75568729921951, 20.571641921997074, R.drawable.f2));
-        list.add(new Archiitect("Форт №3, Король Фдрих-Вильгельм 1", "что-то", 54.761692343405734, 20.54651498794556, R.drawable.f2));
-        list.add(new Archiitect("Форт №4, Гнайзенау", "что-то", 54.764156011012226, 20.48784971237183, R.drawable.f2));
-        list.add(new Archiitect("Форт №5, Король Фдрих-Вильгельм 3", "что-то", 54.75239343278619, 20.442960262298588, R.drawable.f2));
-        list.add(new Archiitect("Форт №5a, Лендорф", "что-то", 54.73954355426537, 20.427478551864628, R.drawable.f2));
-        list.add(new Archiitect("Форт №6, Королева Луиза", "что-то", 54.72226565543917, 20.413584709167484, R.drawable.f2));
-        list.add(new Archiitect("Форт №7, Герцог фон Хольштайн", "что-то", 54.69391535, 20.387900272220783, R.drawable.f2));
-        list.add(new Archiitect("Форт №8, Король Фридрих", "что-то", 54.6647476772742145, 20.43045043945313, R.drawable.f2));
-        list.add(new Archiitect("Форт №9, Донна", "что-то", 54.65327898585188, 20.485038757324222, R.drawable.f2));
-        list.add(new Archiitect("Форт №10, Каницт", "что-то", 54.65064718445805, 20.528469085693363, R.drawable.f2));
-        list.add(new Archiitect("Форт №11, Денхофф", "что-то", 54.65670503795502, 20.567607879638675, R.drawable.f2));
-        list.add(new Archiitect("Форт №12, Ойленбург", "что-то", 54.6713493947706, 20.599536895751957, R.drawable.f2));
-      //  list.add(new Archiitect("Форт №10, Каницт", "что-то", 54.65064718445805, 20.528469085693363, R.drawable.f2));
+        list.add(new Archiitect("Форт №1, Штайн", "Форт был построен в 1875–1879 годах для защиты шоссе на Инстербург, назван в честь прусского государственного деятеля Генриха Карла фон Штайна.", 54.70606519543658, 20.60565233230591, R.drawable.f1));
+        list.add(new Archiitect("Форт №1a, Грёбен", "Малый форт, названный в честь прусского военного деятеля, генерала Карла фон дер Гребена.", 54.734873239025106, 20.609128475189213, R.drawable.f1a));
+        list.add(new Archiitect("Форт №2, Бронзарт", "Форт построен в 1875–1879 годах для прикрытия дороги на Тильзит и назван в честь военного министра Пауля Бронзарта фон Шелленберга.", 54.748802070052355, 20.601339340209964, R.drawable.f2));
+        list.add(new Archiitect("Форт №2а, Барнеков", "Малый форт, главная особенность которого — в цвете используемого кирпича. После войны использовался военными как склад.", 54.75568729921951, 20.571641921997074, R.drawable.f2a));
+        list.add(new Archiitect("Форт №3, Король Фдрих-Вильгельм 1", "Форт возведен в 1879 году для обороны шоссе на Кранц, как раньше назывался Зеленоградск.", 54.761692343405734, 20.54651498794556, R.drawable.f3));
+        list.add(new Archiitect("Форт №4, Гнайзенау", "Форт получил название в честь военачальника времен наполеоновских войн, реформатора прусской армии Августа Вильгельма фон Гнейзенау.", 54.764156011012226, 20.48784971237183, R.drawable.f4));
+        list.add(new Archiitect("Форт №5, Король Фдрих-Вильгельм 3", "Форт построен в 1878 году из особо прочного дважды обожженного кирпича, позже укреплен армированным бетоном.", 54.75239343278619, 20.442960262298588, R.drawable.f5));
+        list.add(new Archiitect("Форт №5a, Лендорф", "Малый форт, названный в честь прусского генерала Карла Фридриха Людвига фон Лендорфа, героя наполеоновских войн.", 54.73954355426537, 20.427478551864628, R.drawable.f5a));
+        list.add(new Archiitect("Форт №6, Королева Луиза", "Форт построен в 1875 году для прикрытия железной дороги и шоссе на Пиллау, как тогда назывался современный Балтийск.", 54.72226565543917, 20.413584709167484, R.drawable.f6));
+        list.add(new Archiitect("Форт №7, Герцог фон Хольштайн", "Форт, построенный на берегу реки Прегель, предназначался для защиты с запада реки и Кёнигсбергского канала.", 54.69391535, 20.387900272220783, R.drawable.f7));
+        list.add(new Archiitect("Форт №8, Король Фридрих", "Форт размещается неподалеку от поселка Шоссейный рядом с перекрестком Калининградского шоссе и улицы Парковой.", 54.6647476772742145, 20.43045043945313, R.drawable.f8));
+        list.add(new Archiitect("Форт №9, Донна", "Форт получил название в честь старинного дворянского рода фон Дона, занимавшего важное место при прусском королевском дворе.", 54.65327898585188, 20.485038757324222, R.drawable.f9));
+        list.add(new Archiitect("Форт №10, Каницт", "Форт построен в 1877–1881 годах для прикрытия транспортных путей на города Цинтен и Домнау.", 54.65064718445805, 20.528469085693363, R.drawable.f10));
+        list.add(new Archiitect("Форт №11, Денхофф", "Форт построили в 1877–1881 годах для защиты железной дороги на Инстербург (ныне Черняховск).", 54.65670503795502, 20.567607879638675, R.drawable.f11));
+        list.add(new Archiitect("Форт №12, Ойленбург", "Форт построен в 1884 году и назван в честь немецких князей Ойленбургов, одних из древнейших домов Северной Европы.", 54.6713493947706, 20.599536895751957, R.drawable.f12));
+
 
 
         for (Archiitect i:list) {
@@ -224,14 +182,13 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
                 TextView tv1 = (TextView) v.findViewById(R.id.textView1);
                 TextView tv2 = (TextView) v.findViewById(R.id.textView2);
                 TextView tv3 = (TextView) v.findViewById(R.id.tosite);
-                //Button bt = (Button) v.findViewById(R.id.butmap);
+
                 String title=marker.getTitle();
                 String informations=marker.getSnippet();
 
                 tv1.setText(title);
                 tv2.setText(informations);
 
-//                                          if(onMarkerClick(marker)==true && markerclicked==1){
                 int image=0;
                 for (Archiitect i:list) {
                     if(title.equals(i.getTitle())) image=i.getImage();
@@ -241,7 +198,6 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
                 }
                 im.setImageResource(image);
                 im.setImageResource(image);
-//                                          }
 
                 return v;
             }
@@ -251,39 +207,27 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
 
         mMap.setOnInfoWindowClickListener(this);
 
-        listkirh.add(new Kirh("Кирха Понарт", "где этот текст?", 54.681168799999995, 20.480499081242428, R.drawable.f2));
-        listkirh.add(new Kirh("Кирха Луизы", "В 1901 г., по проекту архитекторов Хайтмана и Краха была сооружена мемориальная кирха в честь королевы Луизы.",
+        listkirh.add(new Kirh("Кирха Понарт", "Евангелическая кирха Кёнигсберга, построенная в 1897 году, название было дано из-за расположения кирхи в одном из самых старейших пригородов Кёнигсберга — Понарте.", 54.681168799999995, 20.480499081242428, R.drawable.f2));
+        listkirh.add(new Kirh("Кирха Луизы", "Кирха строилась в память о королеве Пруссии Луизе. Архитектуру нельзя однозначно отнести к определённому стилю.",
                 54.71948960162723, 20.475490093231205, R.drawable.luiz));
-        listkirh.add(new Kirh("Бургкирха", "где этот текст?", 54.712241841984536, 20.51547110080719, R.drawable.f1));
-        listkirh.add(new Kirh("Кафедральный собор", "Основан в 1333 году", 54.70645005, 20.512169623964496, R.drawable.kaf));
-        listkirh.add(new Kirh("Кирха Христа в Ратсхофе", "что-то", 54.7120745, 20.45344437337436, R.drawable.kaf));
-        listkirh.add(new Kirh("Розенауская кирха", "что-то", 54.683260000000004, 20.53171112208188, R.drawable.kaf));
-        listkirh.add(new Kirh("Кирха Святого семейства", "что-то", 54.6976962, 20.5096936, R.drawable.kaf));
-        listkirh.add(new Kirh("Кирха Юдиттен", "Кирха Юдиттен", 54.715707949999995, 20.4251923, R.drawable.kaf));
-        listkirh.add(new Kirh("Россгартенсая кирха", "Россгартенсая кирха", 54.711854473339216, 20.49984455108643, R.drawable.kaf));
-        listkirh.add(new Kirh("Кирха Лютера", "Кирха Лютера", 54.698880135101575, 20.517107248306278, R.drawable.kaf));
-        listkirh.add(new Kirh("Армянская Церковь Святого Степаноса", "Армянская Церковь Святого Степаноса", 54.7471144, 20.523380192129792, R.drawable.kaf));
-        listkirh.add(new Kirh("Трагхаймская кирха", "Трагхаймская кирха", 54.7161023, 20.5055122, R.drawable.frida));
+        listkirh.add(new Kirh("Бургкирха", "Первая реформаторская (протестантская) кирха, не представляющая собой уменьшенную копию Новой церкви в Гааге", 54.712241841984536, 20.51547110080719, R.drawable.f1));
+        listkirh.add(new Kirh("Кафедральный собор", "собор являлся главным католическим храмом города Кёнигсберга, а затем главным лютеранским храмом Пруссии.", 54.70645005, 20.512169623964496, R.drawable.kaf));
+        listkirh.add(new Kirh("Кирха Христа в Ратсхофе", "Последнее культовое сооружение, возведенное немцами в Кёнигсберге. Находилась в районе Ратсхоф, месте проживания в основном рабочего класса.", 54.7120745, 20.45344437337436, R.drawable.kaf));
+        listkirh.add(new Kirh("Розенауская кирха", "Кирха в предместье Кенигсберга Розенау по проекту архитектора Пфлаум, получила статус объекта культурного наследия регионального значения.", 54.683260000000004, 20.53171112208188, R.drawable.kaf));
+        listkirh.add(new Kirh("Кирха Святого семейства", "Католическая кирха из красного кирпича, являющаяся самым значимым творением Фридриха Хайтманна.", 54.6976962, 20.5096936, R.drawable.kaf));
+        listkirh.add(new Kirh("Кирха Юдиттен", "Бывшая орденская католическая (а затем — евангелическая) приходская церковь Девы Марии в районе Юдиттен (Кёнигсберг).", 54.715707949999995, 20.4251923, R.drawable.kaf));
+        listkirh.add(new Kirh("Россгартенсая кирха", "Кирха с традиционной ориентировкой по сторонам света и высокой церковной башней 84 метра.", 54.711854473339216, 20.49984455108643, R.drawable.kaf));
+        listkirh.add(new Kirh("Кирха Лютера", " Последняя уничтоженная кирха Кенигсберга,освещённая в в честь Мартина Лютера. Стиль - поздний ренессанс.", 54.698880135101575, 20.517107248306278, R.drawable.kaf));
+        //listkirh.add(new Kirh("Армянская Церковь Святого Степаноса", "Армянская Церковь Святого Степаноса", 54.7471144, 20.523380192129792, R.drawable.kaf));
+        listkirh.add(new Kirh("Трагхаймская кирха", "Кирха крестообразной формы, построенная на месте небольшого кирпичного завода по проекту Шультхайса фон Унфрида.", 54.7161023, 20.5055122, R.drawable.f1));
         listkirh.add(new Kirh("Альтштатская  кирха",
-                "евангелическая кирха Кёнигсберга, построенная в 1845 году (старое здание 1264 года было снесено). Немецкое название было дано по географическому расположению кирхи в одном из трёх первых городов Кёнигсберга — Альтштадте."
+                "евангелическая кирха Кёнигсберга, построенная в 1845 году (старое здание 1264 года было снесено)."
                 , 54.712958, 20.509386, R.drawable.altshtadt));
 
         for (Kirh i:listkirh) {
             mMap.addMarker(new MarkerOptions().position(new LatLng(i.getLn(),i.getLt())).title(i.getTite()).snippet(i.getDes()).icon(BitmapDescriptorFactory.fromResource(R.drawable.kirh_marker_icon)));
         }
 
-//        Task<Location> task = client.getLastLocation();
-//
-//        Location location = null;
-//        Location location = locationRequest.equals();
-//        LatLng latLng = new LatLng(i.getLongitude(), (location.getLatitude()));
-//                          //Create marker options
-//        MarkerOptions options = new MarkerOptions().position(latLng)
-//                .title("Я здесь, черти");
-//        //Zoom
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-//        //Add marker
-//        mMap.addMarker(options);
     }
 
 
@@ -311,12 +255,6 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
             return true;
         }
 
-
-//        MarkerOptions options = new MarkerOptions().position().title("Я здесь, черти");
-//        //Zoom
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 10));
-//        //Add marker
-//        mMap.addMarker(options);
     }
 
 
@@ -332,16 +270,6 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
 
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if (requestCode == 44){
-//            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                //When  ermission granted
-//                // Call method
-//                getCurrentLocation();
-//            }
-//        }
-//    }
 }
 
 
