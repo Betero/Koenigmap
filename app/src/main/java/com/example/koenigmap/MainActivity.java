@@ -16,6 +16,7 @@ import com.example.koenigmap.Controller.CategoriesActivity;
 import com.example.koenigmap.Controller.Main2Activity;
 import com.example.koenigmap.Controller.Main3Activity;
 import com.example.koenigmap.Controller.MapsActivity;
+import com.example.koenigmap.R;
 
 public class MainActivity extends AppCompatActivity {
 

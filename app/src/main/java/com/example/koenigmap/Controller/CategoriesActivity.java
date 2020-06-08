@@ -31,19 +31,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class CategoriesActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
+    DatabaseReference myRef = database.getReference("Categories");
 
     private Dialog loadingDialog;
 
     private RecyclerView recyclerView;
     private List<CategoryModel> list;
+    private CategoryAdapter adapter;
 
 
     @Override
@@ -71,26 +76,34 @@ public class CategoriesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         list = new ArrayList<>();
-        final CategoryAdapter adapter = new CategoryAdapter(list);
+
         recyclerView.setAdapter(adapter);
 
         loadingDialog.show();
 
-        myRef.child("Categories").addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                   list.add(dataSnapshot.getValue(CategoryModel.class));
+                int i=1;
+                for (DataSnapshot ds:dataSnapshot.getChildren()) {
+                    String data = dataSnapshot.child("category"+i).getValue().toString();
+                    String[] category=data.split(",");
+                    int sets=Integer.parseInt(category[0].trim().split("=")[1]);
+                    String name=category[1].trim().split("=")[1];
+                    String url=category[2].trim().split("=")[1];
+                    CategoryModel categoryModel=new CategoryModel(name,sets,url);
+                    list.add(categoryModel);
+                    i++;
                 }
+                adapter = new CategoryAdapter(list);
+                recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 loadingDialog.dismiss();
-            }
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(CategoriesActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                loadingDialog.dismiss();
-                finish();
+
             }
         });
 
@@ -205,6 +218,7 @@ public class CategoriesActivity extends AppCompatActivity {
                     finish();
                 }
             });
+
 
             playAnim(question,0, list.get(position).getQuestion());
 
