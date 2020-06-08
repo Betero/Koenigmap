@@ -122,7 +122,7 @@ public class CategoriesActivity extends AppCompatActivity {
     public static class QuestionsActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
+        DatabaseReference myRef = database.getReference("SETS");
 
         private TextView question, noIndication;
         private LinearLayout optionContainer;
@@ -166,25 +166,31 @@ public class CategoriesActivity extends AppCompatActivity {
             list = new ArrayList<>();
 
             loadingDialog.show();
-
-            myRef.child("SETS").child("Category").child("questions").orderByChild("setNo").equalTo(setNo).addListenerForSingleValueEvent(new ValueEventListener() {
+            myRef.child(category).child("questions").orderByChild("setNo").equalTo(setNo).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                     list.add(snapshot.getValue(QuestionModel.class));
-                 }
-                 if (list.size() > 0 ) {
+                    String[] questions = dataSnapshot.child("d"+setNo).getValue().toString().split(",");
+                    String ques = questions[0].split("=")[1];
+                    int setNo = Integer.parseInt(questions[1].split("=")[1]);
+                    String optionC = questions[2].split("=")[1];
+                    String optionD = questions[3].split("=")[1];
+                    String optionA = questions[4].split("=")[1];
+                    String optionB = questions[5].split("=")[1];
+                    String correctANS = questions[6].split("=")[1].substring(0,(questions[6].split("=")[1]).length()-1);
+                    QuestionModel questionModel = new QuestionModel(ques, optionA, optionB, optionC, optionD, correctANS, setNo);
+                    list.add(questionModel);
+                    if (list.size() > 0) {
+                        for (int i = 0; i < 4; i++) {
+                            optionContainer.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    checkAnswer((Button) v);
+                                }
+                            });
+                        }
 
-                     for (int i = 0; i < 4; i++) {
-                         optionContainer.getChildAt(i).setOnClickListener(new View.OnClickListener() {
-                             @Override
-                             public void onClick(View v) {
-                                 checkAnswer((Button) v);
-                             }
-                         });
-                     }
-                     playAnim(question, 0, list.get(position).getQuestion());
-                     nextBtn.setOnClickListener(new View.OnClickListener() {
+                    playAnim(question, 0, list.get(position).getQuestion());
+                    nextBtn.setOnClickListener(new View.OnClickListener() {
                          @Override
                          public void onClick(View v) {
                              nextBtn.setEnabled(false);
@@ -208,19 +214,70 @@ public class CategoriesActivity extends AppCompatActivity {
                      finish();
                      Toast.makeText(QuestionsActivity.this, "no questions", Toast.LENGTH_SHORT).show();
                  }
-                 loadingDialog.dismiss();
+                    loadingDialog.dismiss();
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(QuestionsActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    loadingDialog.dismiss();
-                    finish();
+
                 }
             });
 
 
-            playAnim(question,0, list.get(position).getQuestion());
+//            myRef.child(category).child("questions").orderByChild("setNo").equalTo(setNo).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                     list.add(snapshot.getValue(QuestionModel.class));
+//                 }
+//                 if (list.size() > 0 ) {
+//
+//                     for (int i = 0; i < 4; i++) {
+//                         optionContainer.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+//                             @Override
+//                             public void onClick(View v) {
+//                                 checkAnswer((Button) v);
+//                             }
+//                         });
+//                     }
+//                     playAnim(question, 0, list.get(position).getQuestion());
+//                     nextBtn.setOnClickListener(new View.OnClickListener() {
+//                         @Override
+//                         public void onClick(View v) {
+//                             nextBtn.setEnabled(false);
+//                             nextBtn.setAlpha(0.7f);
+//                             enableOption(true);
+//                             position++;
+//                             if (position == list.size()) {
+//                                 Intent scoreIntent = new Intent(QuestionsActivity.this, ScoreActivity.class);
+//                                 scoreIntent.putExtra("score", score);
+//                                 scoreIntent.putExtra("total", list.size());
+//                                 startActivity(scoreIntent);
+//                                 finish();
+//                                 return;
+//                             }
+//                             count = 0;
+//                             playAnim(question, 0, list.get(position).getQuestion());
+//                         }
+//                     });
+//                 }
+//                 else {
+//                     finish();
+//                     Toast.makeText(QuestionsActivity.this, "no questions", Toast.LENGTH_SHORT).show();
+//                 }
+//                 loadingDialog.dismiss();
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//                    Toast.makeText(QuestionsActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//                    loadingDialog.dismiss();
+//                    finish();
+//                }
+//            });
+
+
+//            playAnim(question,0, list.get(position).getQuestion());
 
 
         }
