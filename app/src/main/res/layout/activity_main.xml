@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Controller.MainActivity">
 
     <ImageView
         android:id="@+id/clover"
@@ -115,7 +115,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Map"
+                    android:text="Карта"
                     android:textColor="#0E1843"
                     android:textSize="19sp" />
 
@@ -123,7 +123,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="50dp"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -139,7 +139,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quiz"
+                    android:text="Викторина"
                     android:textColor="#0E1843"
                     android:textSize="19sp" />
 
@@ -174,7 +174,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:text="История"
                     android:textColor="#0E1843"
                     android:textSize="19sp" />
 
@@ -193,12 +193,12 @@
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:layout_marginBottom="4dp"
-                    android:background="@drawable/setout" />
+                    android:background="@drawable/olo" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Setting"
+                    android:text="О проекте"
                     android:textColor="#0E1843"
                     android:textSize="19sp" />
 

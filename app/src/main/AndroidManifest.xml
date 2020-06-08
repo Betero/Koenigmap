@@ -29,7 +29,7 @@
         <activity android:name=".Controller.SetsActivity" />
         <activity android:name=".Controller.CategoriesActivity$QuestionsActivity" />
         <activity android:name=".Controller.CategoriesActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

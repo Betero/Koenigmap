@@ -99,7 +99,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 loadingDialog.dismiss();
-                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -189,31 +189,31 @@ public class CategoriesActivity extends AppCompatActivity {
                             });
                         }
 
-                    playAnim(question, 0, list.get(position).getQuestion());
-                    nextBtn.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View v) {
-                             nextBtn.setEnabled(false);
-                             nextBtn.setAlpha(0.7f);
-                             enableOption(true);
-                             position++;
-                             if (position == list.size()) {
-                                 Intent scoreIntent = new Intent(QuestionsActivity.this, ScoreActivity.class);
-                                 scoreIntent.putExtra("score", score);
-                                 scoreIntent.putExtra("total", list.size());
-                                 startActivity(scoreIntent);
-                                 finish();
-                                 return;
-                             }
-                             count = 0;
-                             playAnim(question, 0, list.get(position).getQuestion());
-                         }
-                     });
-                 }
-                 else {
-                     finish();
-                     Toast.makeText(QuestionsActivity.this, "no questions", Toast.LENGTH_SHORT).show();
-                 }
+                        playAnim(question, 0, list.get(position).getQuestion());
+                        nextBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                nextBtn.setEnabled(false);
+                                nextBtn.setAlpha(0.7f);
+                                enableOption(true);
+                                position++;
+                                if (position == list.size()) {
+                                    Intent scoreIntent = new Intent(QuestionsActivity.this, ScoreActivity.class);
+                                    scoreIntent.putExtra("score", score);
+                                    scoreIntent.putExtra("total", list.size());
+                                    startActivity(scoreIntent);
+                                    finish();
+                                    return;
+                                }
+                                count = 0;
+                                playAnim(question, 0, list.get(position).getQuestion());
+                            }
+                        });
+                    }
+                    else {
+                        finish();
+                        Toast.makeText(QuestionsActivity.this, "no questions", Toast.LENGTH_SHORT).show();
+                    }
                     loadingDialog.dismiss();
                 }
 
@@ -355,14 +355,14 @@ public class CategoriesActivity extends AppCompatActivity {
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         private void enableOption(boolean enable){
-                for (int i = 0; i < 4; i++) {
-                    optionContainer.getChildAt(i).setEnabled(enable);
-                    if (enable){
+            for (int i = 0; i < 4; i++) {
+                optionContainer.getChildAt(i).setEnabled(enable);
+                if (enable){
 
-                        optionContainer.getChildAt(i).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#989898")));
-                    }
-
+                    optionContainer.getChildAt(i).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#989898")));
                 }
+
+            }
         }
 
     }

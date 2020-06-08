@@ -1,4 +1,4 @@
-package com.example.koenigmap;
+package com.example.koenigmap.Controller;
 
 
 import android.content.Intent;

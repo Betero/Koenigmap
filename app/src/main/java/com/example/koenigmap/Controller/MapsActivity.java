@@ -24,6 +24,7 @@ import com.example.koenigmap.Model.Archiitect;
 import com.example.koenigmap.Model.Kirh;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -135,9 +136,9 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
             mMap.setMyLocationEnabled(true);
         }
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(
-                new LatLng(54.70645005, 20.512169623964496)).zoom(10).build();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(54.70645005, 20.512169623964496)));
+//        CameraPosition cameraPosition = new CameraPosition.Builder().target(
+//                new LatLng(54.70645005, 20.512169623964496)).zoom(10).build();
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(54.70645005, 20.512169623964496)));
 
 
         list.add(new Archiitect("Форт №1, Штайн", "Форт был построен в 1875–1879 годах для защиты шоссе на Инстербург, назван в честь прусского государственного деятеля Генриха Карла фон Штайна.", 54.70606519543658, 20.60565233230591, R.drawable.f1));
@@ -250,11 +251,14 @@ public class MapsActivity<listkirh> extends FragmentActivity implements OnMapRea
     }
 
 
+
     @Override
     public void onInfoWindowClick(Marker marker) {
         Toast.makeText(this, "Загрузка информации", Toast.LENGTH_SHORT).show();
 
     }
+
+
 
 
     @Override
